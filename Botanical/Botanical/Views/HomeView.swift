@@ -69,7 +69,7 @@ struct HomeView: View {
                             Spacer()
                             
                             // Plus button
-                            NavigationLink(destination: Text("New Item").foregroundColor(.white)) {
+                            NavigationLink(destination: NewPlantView()) {
                                 Image(systemName: "plus")
                                     .foregroundColor(Color(hex: "#111E0D"))
                                     .font(.system(size: 25))

@@ -45,29 +45,6 @@ struct NewPlantView: View {
             
             ScrollView {
                 VStack(spacing: 30) {
-//                    // Search bar
-//                    HStack {
-//                        Image(systemName: "magnifyingglass")
-//                            .foregroundColor(.gray)
-//                        
-//                        TextField("Search plants...", text: $searchText)
-//                            .font(.system(size: 16))
-//                        
-//                        if !searchText.isEmpty {
-//                            Button(action: {
-//                                searchText = ""
-//                            }) {
-//                                Image(systemName: "xmark.circle.fill")
-//                                    .foregroundColor(.gray)
-//                            }
-//                        }
-//                    }
-//                    .padding(10)
-//                    .background(Color(.systemGray6))
-//                    .cornerRadius(12)
-//                    .padding(.horizontal)
-//                    .padding(.top, 20)
-                    
                     // Option cards
                     Spacer()
                     VStack(spacing: 20) {
@@ -95,7 +72,7 @@ struct NewPlantView: View {
                     }
                     .padding(.horizontal)
                     
-                    // Recent plants section
+                    // Popular plants section
                     VStack(alignment: .leading, spacing: 15) {
                         Text("Popular Plants")
                             .font(.custom("Satoshi Variable", size: 18))
@@ -121,7 +98,7 @@ struct NewPlantView: View {
             }
         }
         .navigationBarHidden(true)
-        .sheet(isPresented: $showScanner) {
+        .fullScreenCover(isPresented: $showScanner) {
             PlantScannerView()
         }
     }
@@ -199,53 +176,6 @@ struct PopularPlantCardView: View {
                 .foregroundColor(Color(hex: "#111E0D"))
         }
         .frame(width: 150)
-    }
-}
-
-// Placeholder for the plant scanner view
-struct PlantScannerView: View {
-    @Environment(\.presentationMode) var presentationMode
-    
-    var body: some View {
-        VStack {
-            HStack {
-                Button(action: {
-                    presentationMode.wrappedValue.dismiss()
-                }) {
-                    Image(systemName: "xmark")
-                        .font(.title2)
-                        .foregroundColor(.white)
-                        .padding()
-                }
-                
-                Spacer()
-            }
-            
-            Spacer()
-            
-            Text("Camera View Placeholder")
-                .font(.title)
-                .foregroundColor(.white)
-            
-            Spacer()
-            
-            Button(action: {
-                // Handle capture action
-            }) {
-                Circle()
-                    .fill(Color.white)
-                    .frame(width: 70, height: 70)
-                    .overlay(
-                        Circle()
-                            .stroke(Color.black, lineWidth: 3)
-                            .padding(3)
-                    )
-            }
-            .padding(.bottom, 30)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.black)
-        .edgesIgnoringSafeArea(.all)
     }
 }
 
