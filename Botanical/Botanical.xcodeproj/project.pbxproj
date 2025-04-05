@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CB83F8BD2D9DFEB50064FFCE /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = CB83F8BC2D9DFEB50064FFCE /* FirebaseCore */; };
 		CB83F8BF2D9DFEB50064FFCE /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CB83F8BE2D9DFEB50064FFCE /* FirebaseFirestore */; };
+		CB8AD28E2DA0BD2B00D12966 /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = CB8AD28D2DA0BD2B00D12966 /* GoogleGenerativeAI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB8AD28E2DA0BD2B00D12966 /* GoogleGenerativeAI in Frameworks */,
 				CB83F8BD2D9DFEB50064FFCE /* FirebaseCore in Frameworks */,
 				CB83F8BF2D9DFEB50064FFCE /* FirebaseFirestore in Frameworks */,
 			);
@@ -134,6 +136,7 @@
 			packageProductDependencies = (
 				CB83F8BC2D9DFEB50064FFCE /* FirebaseCore */,
 				CB83F8BE2D9DFEB50064FFCE /* FirebaseFirestore */,
+				CB8AD28D2DA0BD2B00D12966 /* GoogleGenerativeAI */,
 			);
 			productName = Botanical;
 			productReference = CB83F8652D9DB9050064FFCE /* Botanical.app */;
@@ -219,6 +222,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				CB83F8BB2D9DFEB50064FFCE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				CB8AD28C2DA0BD2B00D12966 /* XCRemoteSwiftPackageReference "generative-ai-swift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = CB83F8662D9DB9050064FFCE /* Products */;
@@ -599,6 +603,14 @@
 				minimumVersion = 11.11.0;
 			};
 		};
+		CB8AD28C2DA0BD2B00D12966 /* XCRemoteSwiftPackageReference "generative-ai-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/generative-ai-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.6;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -611,6 +623,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CB83F8BB2D9DFEB50064FFCE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		CB8AD28D2DA0BD2B00D12966 /* GoogleGenerativeAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CB8AD28C2DA0BD2B00D12966 /* XCRemoteSwiftPackageReference "generative-ai-swift" */;
+			productName = GoogleGenerativeAI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

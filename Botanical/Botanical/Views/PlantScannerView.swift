@@ -2,7 +2,7 @@
 //  PlantScannerView.swift
 //  Botanical
 //
-//  Created by Rishi Suryavanshi on 4/2/25.
+//  Created by Rishi Suryavanshi on 4/4/25.
 //
 import SwiftUI
 import UIKit
@@ -16,7 +16,8 @@ struct PlantScannerView: View {
     @State private var confidence: Float = 0.0
     @State private var capturedImage: UIImage?
     @State private var showingResult = false
-    @State private var takePhoto = false // Add this state variable
+    @State private var takePhoto = false // State variable for capture button
+    @State private var showPlantProfile = false // State variable for showing plant profile
     
     var body: some View {
         ZStack {
@@ -26,7 +27,7 @@ struct PlantScannerView: View {
                 confidence: $confidence,
                 capturedImage: $capturedImage,
                 showingResult: $showingResult,
-                takePhoto: $takePhoto // Pass this binding to the camera representable
+                takePhoto: $takePhoto
             )
             .edgesIgnoringSafeArea(.all)
             
@@ -72,22 +73,24 @@ struct PlantScannerView: View {
                                     showingResult = false
                                 }) {
                                     Text("Try Again")
+                                        .font(.system(size: 16))
                                         .padding(.vertical, 10)
                                         .padding(.horizontal, 20)
                                         .background(Color.white.opacity(0.2))
-                                        .cornerRadius(10)
+                                        .cornerRadius(25)
                                         .foregroundColor(.white)
                                 }
                                 
                                 Button(action: {
-                                    // Here you would add logic to save this plant
-                                    presentationMode.wrappedValue.dismiss()
+                                    // Show plant profile view
+                                    showPlantProfile = true
                                 }) {
-                                    Text("Done")
+                                    Text("View Profile")
+                                        .font(.system(size: 16))
                                         .padding(.vertical, 10)
                                         .padding(.horizontal, 30)
                                         .background(Color.white)
-                                        .cornerRadius(10)
+                                        .cornerRadius(25)
                                         .foregroundColor(.black)
                                 }
                             }
@@ -97,7 +100,7 @@ struct PlantScannerView: View {
                         .cornerRadius(16)
                         .padding(.bottom, 30)
                     } else {
-                        // Capture button - connect this to the takePhoto state
+                        // Capture button
                         Button(action: {
                             takePhoto = true // Set this to true when button is tapped
                         }) {
@@ -115,6 +118,13 @@ struct PlantScannerView: View {
                 }
             }
         }
+        .fullScreenCover(isPresented: $showPlantProfile) {
+            PlantProfileView(
+                plantName: classificationResult,
+                confidence: confidence,
+                plantImage: capturedImage
+            )
+        }
     }
 }
 
@@ -124,7 +134,7 @@ struct CameraRepresentable: UIViewControllerRepresentable {
     @Binding var confidence: Float
     @Binding var capturedImage: UIImage?
     @Binding var showingResult: Bool
-    @Binding var takePhoto: Bool // Add this binding
+    @Binding var takePhoto: Bool
     
     func makeUIViewController(context: Context) -> CameraViewController {
         let controller = CameraViewController()
@@ -177,22 +187,9 @@ class CameraViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     private var previewLayer: AVCaptureVideoPreviewLayer?
     private let photoOutput = AVCapturePhotoOutput()
     
-    // We don't need this button anymore since we're using SwiftUI button
-    // private let captureButton: UIButton = {
-    //     let button = UIButton(frame: CGRect(x: 0, y: 0, width: 70, height: 70))
-    //     button.layer.cornerRadius = 35
-    //     button.backgroundColor = .white
-    //     return button
-    // }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCamera()
-        
-        // We don't need to add the button to the view
-        // captureButton.center = CGPoint(x: view.center.x, y: view.bounds.height - 100)
-        // captureButton.addTarget(self, action: #selector(capturePhoto), for: .touchUpInside)
-        // view.addSubview(captureButton)
     }
     
     override func viewDidAppear(_ animated: Bool) {
