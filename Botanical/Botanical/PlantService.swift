@@ -92,7 +92,7 @@ class PlantService {
             Task {
                 do {
                     // Hardcode the API key that was working in your GeminiService
-                    let apiKey = "AIzaSyA9PlU3V3tJ3ljhsa-oM4qn9cn2WFvodRc"
+                    let apiKey = AppEnvironment.geminiAPIKey
                     
                     // Use the same model as in your working GeminiService
                     let model = GenerativeModel(

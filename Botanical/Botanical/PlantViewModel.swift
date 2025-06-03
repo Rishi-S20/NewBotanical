@@ -185,6 +185,8 @@ class PlantViewModel: ObservableObject {
         plant?.growthHabit = info.growthHabit
     }
     
+    
+    
     private func createGeminiPrompt(for plantName: String) -> String {
         return """
         I need detailed care information about the plant "\(plantName)" in JSON format.

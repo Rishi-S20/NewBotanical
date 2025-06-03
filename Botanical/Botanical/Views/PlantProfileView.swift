@@ -87,7 +87,11 @@ struct PlantProfileView: View {
                     Spacer()
                     
                     // Home button
-                    NavigationLink(destination: HomeView()) {
+                    Button(action: {
+                        // Reset to HomeView by setting the root view
+                        UIApplication.shared.windows.first?.rootViewController = UIHostingController(rootView: HomeView())
+                        UIApplication.shared.windows.first?.makeKeyAndVisible()
+                    }) {
                         VStack(spacing: 4) {
                             Image(systemName: "house.fill")
                                 .font(.system(size: 20))
@@ -96,7 +100,8 @@ struct PlantProfileView: View {
                         }
                         .foregroundColor(Color(hex: "#2D3B26"))
                         .frame(width: 70)
-                    }
+                    }                    // Home button
+                   
                     
                     Spacer()
                     

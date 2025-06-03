@@ -10,6 +10,8 @@ import SwiftUI
 struct HomeView: View {
     @State private var showMenu = false
     @StateObject private var viewModel = HomeViewModel()
+    @State private var rootViewId = UUID()
+
     
     var body: some View {
         ZStack(alignment: .leading) {
@@ -68,7 +70,7 @@ struct HomeView: View {
                                         )
                                         
                                         QuickActionCard(
-                                            title: "Add New Plant",
+                                            title: "New Plant",
                                             iconName: "plus",
                                             backgroundColor: Color(hex: "#FEEBC8"),
                                             destination: AnyView(NewPlantView())

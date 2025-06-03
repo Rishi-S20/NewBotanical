@@ -20,21 +20,15 @@ enum AppEnvironment {
 #endif
     }()
     
-    // API Keys and URLs
+    // API Keys and URLs - now using secure configuration
     static var geminiAPIKey: String {
-        switch current {
-        case .development:
-            return "AIzaSyBynDFI9V8QiVUubV_GSuyY9Sso2tWKMk8" // Directly use the API key
-        case .production:
-            return "AIzaSyBynDFI9V8QiVUubV_GSuyY9Sso2tWKMk8" // Directly use the API key
-        }
+        // Try to get from APIKeys file first (for local development)
+        return APIKeys.geminiAPIKey
     }
     
     static var geminiAPIEndpoint: String {
         return "https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent"
     }
-    
- 
     
     // App version
     static var appVersion: String {
@@ -79,8 +73,18 @@ extension AppEnvironment {
     // Method to securely retrieve API keys from the keychain in a real app
     static func getSecureAPIKey(for service: String) -> String? {
         // In a real app, you would implement Keychain access here
-        // For demo purposes, we'll just return the environment variable
-        return ProcessInfo.processInfo.environment[service]
+        // For demo purposes, we'll check environment variables first
+        if let envKey = ProcessInfo.processInfo.environment[service] {
+            return envKey
+        }
+        
+        // Fall back to the APIKeys file
+        switch service {
+        case "GEMINI_API_KEY":
+            return APIKeys.geminiAPIKey
+        default:
+            return nil
+        }
     }
     
     static func getGeminiEndpointWithKey() -> URL? {
