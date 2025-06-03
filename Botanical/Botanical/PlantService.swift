@@ -107,6 +107,7 @@ class PlantService {
                         )
                     )
                     
+                    
                     // Create a chat instance
                     let chat = model.startChat()
                     
